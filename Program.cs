@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Hosting;
 using System.IO;
 
-namespace TodoApi
+namespace Customer
 {
     public class Program
     {

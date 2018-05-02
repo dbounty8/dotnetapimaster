@@ -1,14 +1,14 @@
 ﻿'use strict';
-angular.module('todoApp')
-.controller('todoListCtrl', ['$scope', '$location', 'todoListSvc', function ($scope, $location, todoListSvc) {
+angular.module('CustomerApp')
+.controller('CustomerListCtrl', ['$scope', '$location', 'CustomerListSvc', function ($scope, $location, CustomerListSvc) {
     $scope.error = "";
     $scope.loadingMessage = "Loading...";
-    $scope.todoList = null;
+    $scope.CustomerList = null;
     $scope.editingInProgress = false;
-    $scope.newToDoName = "";
+    $scope.newCustomerName = "";
 
 
-    $scope.editInProgressTodo = {
+    $scope.editInProgressCustomer = {
         name: "",
         isComplete: false,
         id: 0
@@ -16,12 +16,12 @@ angular.module('todoApp')
 
     
 
-    $scope.editSwitch = function (todo) {
-        todo.edit = !todo.edit;
-        if (todo.edit) {
-            $scope.editInProgressTodo.name = todo.name;
-            $scope.editInProgressTodo.id = todo.id;
-            $scope.editInProgressTodo.isComplete = todo.isComplete;
+    $scope.editSwitch = function (Customer) {
+        Customer.edit = !Customer.edit;
+        if (Customer.edit) {
+            $scope.editInProgressCustomer.name = Customer.name;
+            $scope.editInProgressCustomer.id = Customer.id;
+            $scope.editInProgressCustomer.isComplete = Customer.isComplete;
             $scope.editingInProgress = true;
         } else {
             $scope.editingInProgress = false;
@@ -29,8 +29,8 @@ angular.module('todoApp')
     };
 
     $scope.populate = function () {
-        todoListSvc.getItems().success(function (results) {
-            $scope.todoList = results;
+        CustomerListSvc.getItems().success(function (results) {
+            $scope.CustomerList = results;
             $scope.loadingMessage = "";
         }).error(function (err) {
             $scope.error = err;
@@ -38,7 +38,7 @@ angular.module('todoApp')
         })
     };
     $scope.delete = function (id) {
-        todoListSvc.deleteItem(id).success(function (results) {
+        CustomerListSvc.deleteItem(id).success(function (results) {
             $scope.loadingMessage = "";
             $scope.populate();
         }).error(function (err) {
@@ -46,12 +46,12 @@ angular.module('todoApp')
             $scope.loadingMessage = "";
         })
     };
-    $scope.update = function (todo) {
-        $scope.editInProgressTodo.isComplete = todo.isComplete;
-        todoListSvc.putItem($scope.editInProgressTodo).success(function (results) {
+    $scope.update = function (Customer) {
+        $scope.editInProgressCustomer.isComplete = Customer.isComplete;
+        CustomerListSvc.putItem($scope.editInProgressCustomer).success(function (results) {
             $scope.loadingMsg = "";
             $scope.populate();
-            $scope.editSwitch(todo);
+            $scope.editSwitch(Customer);
         }).error(function (err) {
             $scope.error = err;
             $scope.loadingMessage = "";
@@ -61,12 +61,12 @@ angular.module('todoApp')
         if ($scope.editingInProgress) {
             $scope.editingInProgress = false;
         }
-        todoListSvc.postItem({
-            'Name': $scope.newToDoName,
+        CustomerListSvc.postItem({
+            'Name': $scope.newCustomerName,
             'IsComplete': false
         }).success(function (results) {
             $scope.loadingMsg = "";
-            $scope.newToDoName = "";
+            $scope.newCustomerName = "";
             $scope.populate();
         }).error(function (err) {
             $scope.error = err;

@@ -1,5 +1,5 @@
 ﻿'use strict';
-angular.module('todoApp', ['ngRoute'])
+angular.module('CustomerApp', ['ngRoute'])
 .config(['$routeProvider', '$httpProvider', function ($routeProvider, $httpProvider) {
 
     // disable IE ajax request caching
@@ -9,8 +9,8 @@ angular.module('todoApp', ['ngRoute'])
     $httpProvider.defaults.headers.get['If-Modified-Since'] = '0';
 
     $routeProvider.when("/Home", {
-        controller: "todoListCtrl",
-        templateUrl: "/App/Views/TodoList.html",
+        controller: "CustomerListCtrl",
+        templateUrl: "/App/Views/CustomerList.html",
     }).otherwise({ redirectTo: "/Home" });
 
     }]);

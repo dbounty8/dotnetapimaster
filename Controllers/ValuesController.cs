@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 
-namespace TodoApi.Controllers
+namespace Customer.Controllers
 {
     [Route("api/[controller]")] 
     public class ValuesController : Controller
